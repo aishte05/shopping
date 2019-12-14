@@ -2,33 +2,7 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // access
-    $secretKey = '6LfUisYUAAAAANWDVFswE8mSeAJpa3W819uVgda4';
-    $captcha = $_POST['g-recaptcha-response'];
-
-    if(!$captcha){
-        echo "<script>alert('Please check the the captcha form.');</script>";
-      exit;
-    } else if(isset($_POST['submit']))
-    {
-        
-    $name=$_POST['fullname'];
-    $email=$_POST['emailid'];
-    $contactno=$_POST['contactno'];
-    $password=md5($_POST['password']);
-    $query=mysqli_query($con,"insert into users(name,email,contactno,password) values('$name','$email','$contactno','$password')");
-    if($query)
-    {
-        echo "<script>alert('Successfully Registered');</script>";
-    }
-    else{
-    echo "<script>alert('Unsucessful Something is Wrong');</script>";
-    }
-    }
-    
-    if(isset($_POST['login']))
+ if(isset($_POST['login']))
     {
        $email=$_POST['email'];
        $password=md5($_POST['password']);
@@ -62,6 +36,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
     }
     }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // access
+    $secretKey = '6LfUisYUAAAAANWDVFswE8mSeAJpa3W819uVgda4';
+    $captcha = $_POST['g-recaptcha-response'];
+
+    if(!$captcha){
+        echo "<script>alert('Please check the the captcha form.');</script>";
+      exit;
+    } else if(isset($_POST['submit']))
+    {
+        
+    $name=$_POST['fullname'];
+    $email=$_POST['emailid'];
+    $contactno=$_POST['contactno'];
+    $password=md5($_POST['password']);
+    $query=mysqli_query($con,"insert into users(name,email,contactno,password) values('$name','$email','$contactno','$password')");
+    if($query)
+    {
+        echo "<script>alert('Successfully Registered');</script>";
+    }
+    else{
+    echo "<script>alert('Unsucessful Something is Wrong');</script>";
+    }
+    }
+    
+   
 } else {
     # Not a POST request, set a 403 (forbidden) response code.
     http_response_code(403);

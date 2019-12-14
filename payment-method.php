@@ -5,26 +5,43 @@ include('includes/config.php');
 $test = $_POST['paymethod'];
 //On page 2
 $qty = $_SESSION['qty1'];
+$totalprice = $_SESSION['tp'];
+$pd = $_SESSION['sid'];
 if ($test == "Paypal") {
+   
+    
     echo '<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">';
         echo "<input type='hidden' name='business'
             value='sb-xo0jc709621@business.example.com'> <input type='hidden'
             name='item_number' value='$qty'> <input type='hidden'                      
+            name='item_name' value='$pd'> <input type='hidden'
+             
+            name='amount' value='$totalprice'> <input type='hidden'
+            name='no_shipping' value='1000'> <input type='hidden'
+            name='currency_code' value='PHP'> <input type='hidden'
+            
             name='notify_url'
-            value='http://localhost/shopping/paypal/paypal-payment-gateway-integration-in-php/notify.php'>";
+            
+            value='http://localhost/shopping/order-history.php'>";
+            mysqli_query($con,"update orders set paymentMethod='".$_POST['paymethod']."' where userId='".$_SESSION['id']."' and paymentMethod is null ");
+		    unset($_SESSION['cart']);
         echo "<input type='hidden' name='cancel_return'
-            value='http://localhost/shopping/paypal/paypal-payment-gateway-integration-in-php/cancel.php'>";
+            value='http://localhost/shopping/order-history.php'>";
         echo "<input type='hidden' name='return'
-            value='http://localhost/shopping/paypal/paypal-payment-gateway-integration-in-php/return.php'>";
+            value='http://localhost/shopping/order-history.php'>";
+            
         echo '<input type="hidden" name="cmd" value="_xclick"> <input
             type="submit" name="pay_now" id="pay_now"
             Value= "Redirecting Please Wait">';
+            
     echo '</form>';
     echo "<script>";
     echo 'window.onload=function(){
       document.getElementById("pay_now").click();
     };';
+    
     echo '</script>';
+    
     
 } 
 else if(strlen($_SESSION['login'])==0)

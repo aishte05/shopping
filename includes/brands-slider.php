@@ -38,11 +38,6 @@
 					</a>	
 				</div>
 
-				<div class="item">
-					<a href="https://www.oliverpeoples.com/usa" class="image">
-						<img data-echo="brandsimage/oli.png" src="assets/images/blank.gif" alt="">
-					</a>	
-				</div>
 
 		    </div>
 		</div>

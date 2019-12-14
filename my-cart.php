@@ -51,7 +51,8 @@ else{
 mysqli_query($con,"insert into orders(userId,productId,quantity) values('".$_SESSION['id']."','$qty','$val34')");
 //On page 1
 $_SESSION['qty1'] = $qty;
-
+$_SESSION['tp'] = $totalprice;
+$_SESSION['sid']=$pd;
 
 
 header('location:payment-method.php');
@@ -200,10 +201,7 @@ if(!empty($_SESSION['cart'])){
                                             </td>
                                             <td class="cart-product-name-info">
                                                 <h4 class='cart-product-description'><a
-                                                        href="product-details.php?pid=<?php echo htmlentities($pd=$row['id']);?>"><?php echo $row['productName'];
-
-$_SESSION['sid']=$pd;
-						 ?></a></h4>
+                                                        href="product-details.php?pid=<?php echo htmlentities($pd=$row['id']);?>"><?php echo $row['productName']; $_SESSION['sid']=$pd; ?></a></h4>
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <div class="rating rateit-small"></div>

@@ -109,7 +109,7 @@ body {
                                 </li>
 
 
-                                <?php $sql=mysqli_query($con,"select id,categoryName  from category limit 6");
+                                <?php $sql=mysqli_query($con,"select id,categoryName  from category");
 while($row=mysqli_fetch_array($sql))
 {
     ?>
